@@ -1,4 +1,4 @@
-<?php
+<?php defined ('SISPATH') or die ('Acces Denied');
 
 // --------------------------------------------------------------------
 
@@ -128,4 +128,37 @@ if ( ! function_exists('word_limiter'))
 
 		return rtrim($matches[0]).$end_char;
 	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Get Data
+ *
+ * @access	public
+ * @param	string
+ * @param	integer
+ * @param	string	the end character. Usually an ellipsis
+ * @return	string
+ */
+if ( ! function_exists('get_post'))
+{
+        function get_post ($string)
+        {
+                try
+                {
+                        if ( @$_POST[$string])
+                        {
+                                return mysql_real_escape_string ($_POST[$string]);
+                        }
+                        elseif ( @$_GET[$string])
+                        {
+                                return mysql_real_escape_string ($_GET[$string]);
+                        }
+                }
+                catch ( Exception $m)
+                {
+                        echo 'Error : '. $m->getMessage ();
+                }
+        }
 }
