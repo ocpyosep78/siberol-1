@@ -8,29 +8,32 @@
  * @param	string
  * @return	string
  */
-function filter_uri($str)
+if ( ! function_exists('filter_uri'))
 {
-        if ($str != '')
+        function filter_uri($str)
         {
-                try
+                if ($str != '')
                 {
-                        if ( ! preg_match("/^([a-z0-9-?=])+$/i", $str))
+                        try
                         {
-                                throw new Exception ('The URI you submitted has disallowed characters.');
+                                if ( ! preg_match("/^([a-z0-9-?=])+$/i", $str))
+                                {
+                                        throw new Exception ('The URI you submitted has disallowed characters.');
+                                }
+                                else
+                                {
+                                        // Convert programatic characters to entities
+                                        $bad	= array('$',		'(',		')',		'%28',		'%29');
+                                        $good	= array('&#36;',	'&#40;',	'&#41;',	'&#40;',	'&#41;');
+                                
+                                        return str_replace($bad, $good, $str);
+                                }
                         }
-                        else
+                        catch ( Exception $m)
                         {
-                                // Convert programatic characters to entities
-                                $bad	= array('$',		'(',		')',		'%28',		'%29');
-                                $good	= array('&#36;',	'&#40;',	'&#41;',	'&#40;',	'&#41;');
-                        
-                                return str_replace($bad, $good, $str);
-                        }
+                                echo " Error : ". $m->getMessage ();
+                        }       
                 }
-                catch ( Exception $m)
-                {
-                        echo " Error : ". $m->getMessage ();
-                }       
         }
 }
 
@@ -41,21 +44,24 @@ function filter_uri($str)
  * 
  * @return	string
  */
-function base_url ()
+if ( ! function_exists('method_name'))
 {
-        if (isset($_SERVER['HTTP_HOST']))
+        function base_url ()
         {
-                $base_url = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' ? 'https' : 'http';
-                $base_url .= '://'. $_SERVER['HTTP_HOST'];
-                $base_url .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
-        }
-
-        else
-        {
-                $base_url = 'http://localhost/';
-        }
+                if (isset($_SERVER['HTTP_HOST']))
+                {
+                        $base_url = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' ? 'https' : 'http';
+                        $base_url .= '://'. $_SERVER['HTTP_HOST'];
+                        $base_url .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+                }
         
-        return $base_url;
+                else
+                {
+                        $base_url = 'http://localhost/';
+                }
+                
+                return $base_url;
+        }
 }
 
 // --------------------------------------------------------------------
@@ -65,25 +71,61 @@ function base_url ()
  * 
  * @return	string
  */
-function method_name ()
+if ( ! function_exists('method_name'))
 {
-        if (isset($_SERVER['HTTP_HOST']))
+        function method_name ()
         {
-                $base = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' ? 'https' : 'http';
-                $base .= "://". $_SERVER['SERVER_NAME'];
-                $base .= $_SERVER['REQUEST_URI'];
+                if (isset($_SERVER['HTTP_HOST']))
+                {
+                        $base = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' ? 'https' : 'http';
+                        $base .= "://". $_SERVER['SERVER_NAME'];
+                        $base .= $_SERVER['REQUEST_URI'];
+                        
+                        $method = str_replace ( base_url().'index.php/','', $base );
+                }
+                $post = strpos($method,'?');
                 
-                $method = str_replace ( base_url().'index.php/','', $base );
+                if ( $post )
+                {
+                        return filter_uri( substr($method, 0, $post));
+                }
+                else
+                {
+                        return filter_uri($method);
+                }
         }
-        $post = strpos($method,'?');
-        
-        if ( $post )
-        {
-                return filter_uri( substr($method, 0, $post));
-        }
-        else
-        {
-                return filter_uri($method);
-        }
-        
+}
+
+
+// ------------------------------------------------------------------------
+
+/**
+ * Word Limiter
+ *
+ * Limits a string to X number of words.
+ *
+ * @access	public
+ * @param	string
+ * @param	integer
+ * @param	string	the end character. Usually an ellipsis
+ * @return	string
+ */
+if ( ! function_exists('word_limiter'))
+{
+	function word_limit ($str, $limit = 100, $end_char = '&#8230;')
+	{
+		if (trim($str) == '')
+		{
+			return $str;
+		}
+
+		preg_match('/^\s*+(?:\S++\s*+){1,'.(int) $limit.'}/', $str, $matches);
+
+		if (strlen($str) == strlen($matches[0]))
+		{
+			$end_char = '';
+		}
+
+		return rtrim($matches[0]).$end_char;
+	}
 }
