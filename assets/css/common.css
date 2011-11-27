@@ -1,5 +1,5 @@
 h1, h2, h3, h4, h5 { font-weight: normal;}
-article.post {  border-bottom:1px solid #CCC; padding-bottom: 10px; margin-bottom: 20px}
+article.post {  padding-bottom: 10px; margin-bottom: 20px}
 article.post h4 { margin:0; padding: 0}
 article.post p {margin: 20px 0 20px 0}
 article.post p.post-meta { font-size:11px; margin-top: 0; }

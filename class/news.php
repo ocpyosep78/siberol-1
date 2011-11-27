@@ -11,13 +11,13 @@
     <div class="container">
         <div class="row">
             <div class="span8">
-                <?php if ( get_post('method') == 'read'):?>
+                <?php if ( get_post('method') === 'read'):?>
                 
                     <?php $item = $DB->get ('SELECT * FROM berita where status="1" AND id="'.get_post('id').'"','one');?>
                     <?php if ($item):?>
                         <article  class="post-<?php echo $item->id?> post type-post status-publish format-standard hentry">
                             <h4 class="entry-title">
-                                <a href="<?php echo base_url().'index.php/news?method=read&id='.$item->id?>" title="<?php echo $item->judul?>"><?php echo $item->judul?></a>
+                                <a href="<?php echo base_url().'news?method=read&id='.$item->id?>" title="<?php echo $item->judul?>"><?php echo $item->judul?></a>
                             </h4>
                             <p class="post-meta">
                                 <span class="post-date"><?php echo $item->tgl_tayang?></span>
@@ -28,9 +28,13 @@
                             <p>
                                 <?php echo $item->isi, 50?>
                             </p>
-                            <a class="post-more left" href="<?php echo base_url().'index.php/news?method=read&id='.($item->id - 1 );?>">&larr; Artikel Sebelumnya </a>
-                            <a class="post-more right" href="<?php echo base_url().'index.php/news?method=read&id='.($item->id + 1 );?>">Artikel Selanjutnya &rarr;</a>
+                            <a class="post-more left" href="<?php echo base_url().'news?method=read&id='.($item->id - 1 );?>">&larr; Artikel Sebelumnya </a>
+                            <a class="post-more right" href="<?php echo base_url().'news?method=read&id='.($item->id + 1 );?>">Artikel Selanjutnya &rarr;</a>
                         </article>
+                    <?php else:?>
+                        <div class="alert-message block-message error">
+                            <p><strong>Ohh no!</strong> The page you are looking is not found<p>
+                        </div>
                     <?php endif?>
                     
                 <?php else:?>
@@ -41,7 +45,7 @@
                     
                     <article  class="post-<?php echo $item->id?> post type-post status-publish format-standard hentry">
                         <h4 class="entry-title">
-                            <a href="<?php echo base_url().'index.php/news?method=read&id='.$item->id?>" title="<?php echo $item->judul?>"><?php echo $item->judul?></a>
+                            <a href="<?php echo base_url().'news?method=read&id='.$item->id?>" title="<?php echo $item->judul?>"><?php echo $item->judul?></a>
                         </h4>
                         <p class="post-meta">
                             <span class="post-date"><?php echo $item->tgl_tayang?></span>
@@ -52,7 +56,7 @@
                         <p>
                             <?php echo word_limit($item->isi, 50)?>
                         </p>
-                        <a class="post-more" href="<?php echo base_url().'index.php/news?method=read&id='.$item->id?>">Continue Reading &rarr;</a>
+                        <a class="post-more" href="<?php echo base_url().'news?method=read&id='.$item->id?>">Continue Reading &rarr;</a>
                     </article>
                     
                     <?php endforeach?>

@@ -81,7 +81,7 @@ if ( ! function_exists('method_name'))
                         $base .= "://". $_SERVER['SERVER_NAME'];
                         $base .= $_SERVER['REQUEST_URI'];
                         
-                        $method = str_replace ( base_url().'index.php/','', $base );
+                        $method = str_replace ( base_url(),'', $base );
                 }
                 $post = strpos($method,'?');
                 
@@ -136,29 +136,60 @@ if ( ! function_exists('word_limiter'))
  * Get Data
  *
  * @access	public
- * @param	string
- * @param	integer
  * @param	string	the end character. Usually an ellipsis
  * @return	string
  */
 if ( ! function_exists('get_post'))
 {
-        function get_post ($string)
+	function get_post ($string)
+    {
+    	try
         {
-                try
-                {
-                        if ( @$_POST[$string])
-                        {
-                                return mysql_real_escape_string ($_POST[$string]);
-                        }
-                        elseif ( @$_GET[$string])
-                        {
-                                return mysql_real_escape_string ($_GET[$string]);
-                        }
-                }
-                catch ( Exception $m)
-                {
-                        echo 'Error : '. $m->getMessage ();
-                }
+        	if ( @$_POST[$string])
+            {
+            	return mysql_real_escape_string ($_POST[$string]);
+				//return htmlentities($string, ENT_QUOTES);
+            }
+            elseif ( @$_GET[$string])
+            {
+            	return mysql_real_escape_string ($_GET[$string]);
+				//return htmlentities($string, ENT_QUOTES);
+            }
+       	}
+        catch ( Exception $m)
+       	{
+             echo 'Error : '. $m->getMessage ();
         }
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Form Dropdown
+ *
+ * @access	public
+ * @param	string 	name form drowpdown
+ * @param	array 	array item
+ * @param	string	value
+ * @return	string
+ */
+if ( ! function_exists('form_dropdown'))
+{
+		function form_dropdown ($name , $item = array (), $value)
+		{
+				echo '<select name="'.$name.'">';
+				foreach ($item as $val=>$key)
+				{
+						if ( $val == $value)
+						{
+								echo '<option value="'.$val.'" selected="selected">'.$key.'</option>';
+						}
+						else
+						{
+								echo '<option value="'.$val.'">'.$key.'</option>';
+						}
+				}
+				echo '</select>';
+		}
 }

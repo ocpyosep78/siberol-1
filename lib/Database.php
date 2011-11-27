@@ -74,7 +74,7 @@ class Database {
                         try
                         {
                                 $query = mysql_query ($SQL);
-                                if  ( ! ($query AND  mysql_num_rows($query) > 0) )
+                                if  ( ! $query)
                                 {
                                         throw new Exception ('Query Gagal');
                                 }
@@ -104,7 +104,7 @@ class Database {
                 if ($SQL)
                 {
                         $SQL = $this->query ($SQL);
-                        if ( $SQL )
+                        if ( $SQL AND  mysql_num_rows($SQL) > 0 )
                         {
                                 if ($tipe === 'all')
                                 {
