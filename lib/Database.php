@@ -45,16 +45,12 @@ class Database {
                                 }
                                 catch (Exception $m)
                                 {
-                                        //echo "<br />";
-                                        //echo " File : ". $m->getFile()."<br />";
                                         echo " Error : ". $m->getMessage ();
                                 }
                         }
                 }
                 catch ( Exception $m)
                 {
-                        //echo "<br />";
-                        //echo " File : ". $m->getFile()."<br />";
                         echo " Error : ". $m->getMessage ();
                 }
                 
@@ -85,8 +81,6 @@ class Database {
                         }
                         catch ( Exception $m)
                         {
-                                //echo "<br />";
-                               // echo " File : ". $m->getFile()."<br />";
                                 echo " Error : ". $m->getMessage ();
                         }
                 }
@@ -125,7 +119,13 @@ class Database {
         
 }
 
-/*  End class Database  */
+
+/**
+ * Create Instance dari dabatase class
+ *
+ */
+
 $DB = new Database ();
-//$DB->show_host();
-//print_r ($DB->get_all("SELECT * FROM berita WHERE status='1'"));
+
+
+/*  End class Database  */
