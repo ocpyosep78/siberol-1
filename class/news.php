@@ -8,7 +8,27 @@
 </head>
 
 <body>
+<!-- Navbar
+	================================================== -->
+	<div class="navbar navbar-fixed" data-scrollspy="scrollspy">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="<?php echo base_url()?>">Rooms</a>
+				<ul class="nav">
+                                        <li><a href="<?php echo base_url()?>">News</a></li>
+					<li><a href="./index.html">Internet</a></li>
+					<li><a href="./scaffolding.html">Olahraga</a></li>
+					<li><a href="./base-css.html">Politik</a></li>
+					<li><a href="./components.html">Otomotif</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+        
     <div class="container">
+        <div class="page-header">
+                <h1>Siberol<small> Sistem Informasi Berita Online.</small></h1>
+        </div>
         <div class="row">
             <div class="span8">
                 <?php if ( get_post('method') === 'read'):?>
@@ -65,7 +85,30 @@
                 <?php endif?>
             </div>
             <div class="span4">
-                Eed
+                
+                <form action="<?php echo base_url()?>login" class="vertical-form" method="post">
+                        <legend>Form Login</legend>
+                        <fieldset class="control-group">
+                                <label class="control-label">Username:</label>
+                                <div class="controls">
+                                    <input type="text" value="" name="username" placeholder="Type username">
+                                </div>
+                        </fieldset>
+                        <fieldset class="control-group">
+                                <label class="control-label">Password:</label>
+                                <div class="controls">
+                                    <input type="text" value="" name="password" placeholder="Type password">
+                                </div>
+                        </fieldset>
+                        
+                        <fieldset class="form-actions">
+                                <input type="submit" name="submit" value="Login" class="btn primary">
+                                <input type="reset" name="reset" value="Reset" class="btn">
+                                
+                        </fieldset>
+                        
+                </form>
+                
             </div>
         </div>
     </div>

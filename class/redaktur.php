@@ -1,4 +1,5 @@
 <?php defined ('SISPATH') or die ('Acces Denied');?>
+<?php if ($_SESSION['tipe'] !== 'Redaktur') exit ('You dont have acces this');?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,22 @@
 </head>
 
 <body>
+	<div class="navbar navbar-fixed" data-scrollspy="scrollspy">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="<?php echo base_url()?>">Rooms</a>
+				<ul class="nav">
+                                        <li><a href="<?php echo base_url()?>">News Draft</a></li>
+					<li><a href="./index.html">News Approved</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
     <div class="container">
+	<div class="page-header">
+                <h1>Selamat Datang<small> [Redaktur] <?php echo $_SESSION['nama_lengkap'];?>.</small></h1>
+        </div>
+	
         <div class="row">
             <div class="span8">
 				
