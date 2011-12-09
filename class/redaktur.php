@@ -10,6 +10,7 @@
         
         <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
         <script src="<?php echo base_url()?>assets/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="<?php echo base_url()?>assets/js/ckeditor/ckeditor.js"></script>
         <script>
             $(document).ready(function(){
                 $("#tgl_expire").datepicker({
@@ -32,10 +33,10 @@
 	<div class="navbar navbar-fixed" data-scrollspy="scrollspy">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="<?php echo base_url()?>">Rooms</a>
+				<a class="brand" href="<?php echo base_url()?>redaktur">Siberol</a>
 				<ul class="nav">
-                                        <li><a href="<?php echo base_url()?>">News Draft</a></li>
-					<li><a href="./index.html">News Approved</a></li>
+                                        <li><a href="<?php echo base_url()?>redaktur">News</a></li>
+					<li><a href="<?php echo base_url()?>logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -46,7 +47,7 @@
         </div>
 	
         <div class="row">
-            <div class="span8">
+            <div class="span12">
 				
                 <?php
                 
@@ -76,37 +77,11 @@
                 
                 ?>
 				
-				
-                <?php if ( get_post('method') === 'read'):?>
+                <?php if (get_post('method') === 'edit'):?>
                 
                     <?php $item = $DB->get ('SELECT * FROM berita where id="'.get_post('id').'"','one');?>
                     <?php if ($item):?>
-                        <article  class="post-<?php echo $item->id?> post type-post status-publish format-standard hentry">
-                            <h4 class="entry-title">
-                                <a href="<?php echo base_url().'redaktur?method=read&id='.$item->id?>" title="<?php echo $item->judul?>"><?php echo $item->judul?></a>
-                            </h4>
-                            <p class="post-meta">
-                                <span class="post-date"><?php echo $item->tgl_tayang?></span>
-                                <span class="post-author">By <?php echo $item->nm_war?></span>
-                                <span class="sep">|</span>
-                                <span class="post-categories"><?php echo $item->kategori?></span>
-                            </p>		
-                            <p>
-                                <?php echo $item->isi, 50?>
-                            </p>
-                            <a class="post-more left" href="<?php echo base_url().'redaktur'?>">&larr; Kembali </a>
-                            <a class="post-more right" href="<?php echo base_url().'redaktur?method=edit&id='.($item->id);?>">Edit &rarr;</a>
-                        </article>
-                    <?php else:?>
-                        <div class="alert-message block-message error">
-                            <p><strong>Ohh no!</strong> The page you are looking is not found<p>
-                        </div>
-                    <?php endif?>
-                <?php elseif (get_post('method') === 'edit'):?>
-                
-                    <?php $item = $DB->get ('SELECT * FROM berita where id="'.get_post('id').'"','one');?>
-                    <?php if ($item):?>
-                        <form class="vertical-form" method="post" action="">
+                        <form class="vertical-form" method="post" action="" enctype="multipart/form-data">
                     <legend>Selamat Datang Wartawan</legend>
                         <fieldset class="control-group">
                             <label class="control-label" for="judul">Judul Berita</label>
@@ -142,7 +117,7 @@
                         <fieldset class="control-group">
                             <label class="control-label" for="isi">Isi Berita</label>
                             <div class="controls">
-                                <textarea class="span6" name="isi" rows="15" placeholder="Isi berita ..."><?php echo $item->isi?></textarea>
+                                <textarea class="span9 ckeditor" name="isi" rows="15" placeholder="Isi berita ..."><?php echo $item->isi?></textarea>
                             </div>
                         </fieldset>
                         <fieldset class="form-actions">
@@ -164,27 +139,31 @@
                     
                     <article  class="post-<?php echo $item->id?> post type-post status-publish format-standard hentry">
                         <h4 class="entry-title">
-                            <a href="<?php echo base_url().'redaktur?method=read&id='.$item->id?>" title="<?php echo $item->judul?>"><?php echo $item->judul?></a>
+                            <a href="<?php echo base_url().'redaktur?method=edit&id='.$item->id?>" title="<?php echo $item->judul?>"><?php echo $item->judul?></a>
                         </h4>
                         <p class="post-meta">
                             <span class="post-date"><?php echo $item->tgl_tayang?></span>
                             <span class="post-author">By <?php echo $item->nm_war?></span>
                             <span class="sep">|</span>
                             <span class="post-categories"><?php echo $item->kategori?></span>
+			    <span class="post-status">
+				<?php if ($item->status == '1'):?>
+					<span class="label notice">Publish</span>
+				<?php else:?>
+					<span class="label success">New Draft</span>
+				<?php endif;?>
+			    </span>
                         </p>		
                         <p>
                             <?php echo word_limit($item->isi, 50)?>
                         </p>
-                        <a class="post-more" href="<?php echo base_url().'redaktur?method=read&id='.$item->id?>">Review &rarr;</a>
+                        <a class="post-more" href="<?php echo base_url().'redaktur?method=edit&id='.$item->id?>">Review &rarr;</a>
                     </article>
                     
                     <?php endforeach?>
                     <?php endif?>
                     
                 <?php endif?>
-            </div>
-            <div class="span4">
-                Right Bar
             </div>
         </div>
     </div>
