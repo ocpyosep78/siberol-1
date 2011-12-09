@@ -69,15 +69,7 @@ class Database {
                 {
                         try
                         {
-                                $query = mysql_query ($SQL);
-                                if  ( ! $query)
-                                {
-                                        throw new Exception ('Query Gagal');
-                                }
-                                else
-                                {
-                                        return mysql_query ($SQL);
-                                }
+                                return mysql_query ($SQL);
                         }
                         catch ( Exception $m)
                         {
