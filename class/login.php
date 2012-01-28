@@ -4,27 +4,44 @@ if ($_POST)
 {
         $username = get_post('username');
         $pass   = get_post ('password');
+        $word = get_post('word');
         
-        $SQL = 'SELECT * FROM user WHERE username="'.$username.'" AND password="'.$pass.'"';
-        $data = $DB->get($SQL, 'one');
+         $CAPTH = 'SELECT * FROM captcha WHERE word="'.$word.'" AND ip_address="'.getRealIpAddr().'"';
+       //  $CAPTH = 'SELECT * FROM captcha WHERE word="'.$word.'"';
+        // print_r ($CAPTH);
+
+        $CEK = $DB->get($CAPTH, 'one');
         
-        if ( ! empty ($data))
+        if ($CEK)
         {
-                $_SESSION['nama_lengkap'] = $data->nama_lengkap;
-                $_SESSION['tipe']         = $data->tipe;
+                $SQL = 'SELECT * FROM user WHERE username="'.$username.'" AND password="'.$pass.'"';
+                $data = $DB->get($SQL, 'one');
                 
-                if ($data->tipe === 'Redaktur')
+                $expiration = time() - 7200; // Two hour limit
+                $DB->query("DELETE FROM captcha WHERE captcha_time < ".$expiration."");
+                
+                if ( ! empty ($data))
                 {
-                        header('Location:'. base_url().'redaktur');
+                        $_SESSION['nama_lengkap'] = $data->nama_lengkap;
+                        $_SESSION['tipe']         = $data->tipe;
+                        
+                        if ($data->tipe === 'Redaktur')
+                        {
+                                header('Location:'. base_url().'redaktur');
+                        }
+                        elseif ($data->tipe =='Wartawan')
+                        {
+                                header('Location:'. base_url().'wartawan');
+                        }
                 }
-                elseif ($data->tipe =='Wartawan')
+                else
                 {
-                        header('Location:'. base_url().'wartawan');
+                        throw new Exception ('Username dan Password tidak valid', 404);
                 }
         }
         else
         {
-                throw new Exception ('Username dan Password tidak valid', 404);
+                throw new Exception ('Captha yang anda tulis salah', 404);       
         }
         
 }

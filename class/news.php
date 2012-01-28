@@ -92,15 +92,23 @@
                 <?php endif?>
             </div>
             <div class="span4">
-                <h4>Berita Lainya</h4>
-                <?php $lain = $DB->get('SELECT * FROM berita
-                                       where status="1" AND id != "'.@$_GET['id'].'"  ORDER BY tgl_tayang DESC
-                                       LIMIT 0 , 5','all');?>
-                <ul>
-                    <?php foreach ($lain as $lain):?>
-                    <li> <a class="post-more" href="<?php echo base_url().'news?method=read&id='.$lain->id?>"><?php echo $lain->judul?></a></li>
+              
+                <?php
+                    if ( ! empty($_GET['id'])):
+                        $lain = $DB->get('SELECT * FROM berita
+                                       where status="1" AND id != "'.$_GET['id'].'"  ORDER BY tgl_tayang DESC
+                                       LIMIT 0 , 5','all'); ?>
+                    <h4>Berita Lainya</h4>
+                    <ul>
+                    <?php foreach ($lain as $lain_items):?>
+                    <li> <a class="post-more" href="<?php echo base_url().'news?method=read&id='.$lain_items->id?>"><?php echo $lain_items->judul?></a></li>
                     <?php endforeach;?>
+                    </ul>
                 </ul>
+                <?php    else: ?>
+                         
+                <?php    endif;?>
+                
                 <?php if (empty($_SESSION['nama_lengkap'])):?>
                 <form action="<?php echo base_url()?>login" class="vertical-form" method="post">
                         <legend>Form Login</legend>
@@ -113,7 +121,14 @@
                         <fieldset class="control-group">
                                 <label class="control-label">Password:</label>
                                 <div class="controls">
-                                    <input type="text" value="" name="password" placeholder="Type password">
+                                    <input type="password" value="" name="password" placeholder="Type password">
+                                </div>
+                        </fieldset>
+			<fieldset class="control-group">
+                                <label class="control-label">Enter image capth bellow</label>
+                                <div class="controls">
+				    <img src="<?php echo base_url();?>captcha" alt="gambar">
+                                    <input type="text" value="" name="word" placeholder="Type captcha">
                                 </div>
                         </fieldset>
                         

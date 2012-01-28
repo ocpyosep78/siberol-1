@@ -10,6 +10,7 @@ define('SISPATH','index.php');
 
 require_once ('./lib/Database.php');
 require_once ('./lib/Helper.php');
+// require_once ('./lib/Captcha.php');
 
 try
 {

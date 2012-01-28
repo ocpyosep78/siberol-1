@@ -193,3 +193,28 @@ if ( ! function_exists('form_dropdown'))
 				echo '</select>';
 		}
 }
+// get  real ip address
+function getRealIpAddr()
+{
+    if ( ! empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+    {
+      	return $_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif ( ! empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+    {
+      	return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }	
+    else
+    {
+     	 return $_SERVER['REMOTE_ADDR'];
+    } 
+}
+
+function hexrgb ($hexstr)
+	{
+	  $int = hexdec($hexstr);
+	
+	  return array("red" => 0xFF & ($int >> 0x10),
+		       "green" => 0xFF & ($int >> 0x8),
+		       "blue" => 0xFF & $int);
+	}
