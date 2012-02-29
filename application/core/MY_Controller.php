@@ -34,7 +34,9 @@ class MY_Controller extends CI_Controller {
                 // load spark
 		$this->load->spark('template/1.9.0');
 		$this->load->spark('DataMapper-ORM/1.8.2');
-		
+		$this->load->spark('db-assets/0.5.0');
+
+
                 $this->method   = ucwords(preg_replace('/[_]+/', ' ', strtolower(trim($this->router->fetch_method()))));
 		
 		$this->params['module']		= $this->module;
@@ -54,16 +56,16 @@ class MY_Controller extends CI_Controller {
          * @return      void
          * @filesource
          */
-        protected function _view ($template = null, $actions = null, $not_found = FALSE)
+        protected function _view ($template = 'default', $actions = null, $not_found = FALSE)
         {
 		$this->params['actions']        = $actions;
 		
 		// load template
-		
+		$this->template->set_layout($template);
 		$this->template->build($this->module.'/'.$actions, $this->params);
         }
         
-        public function index ($file = 'index', $template = 'main')
+        public function index ($file = 'index', $template = 'default')
         {
                 
 		$this->_view($template, $file);
@@ -77,7 +79,7 @@ class MY_Controller extends CI_Controller {
 	 * @param	integer
 	 * @return	void
 	 */
-        protected function delete ($file = 'delete', $template = 'main')
+        protected function delete ($file = 'delete', $template = 'default')
         {
                 $this->_view($template, $file);
         }
@@ -89,7 +91,7 @@ class MY_Controller extends CI_Controller {
 	 * @param	integer
 	 * @return	void
 	 */
-        protected function insert ($file = 'form', $template = 'main')
+        protected function insert ($file = 'form', $template = 'default')
         {
 		$this->_view('main', $file);
         }
@@ -115,7 +117,7 @@ class MY_Controller extends CI_Controller {
 	 * @param	integer
 	 * @return	void
 	 */
-	protected function details ($file = 'details', $template = 'main')
+	protected function details ($file = 'details', $template = 'default')
 	{
 		$this->_view($template, $file);
 	}
@@ -127,7 +129,7 @@ class MY_Controller extends CI_Controller {
 	 * @param	integer
 	 * @return	void
 	 */
-	protected function cetak ($file = 'cetak', $template = 'main')
+	protected function cetak ($file = 'cetak', $template = 'default')
 	{
 		
 		$this->_view($template, $file);

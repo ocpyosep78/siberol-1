@@ -1,6 +1,6 @@
 <?php
 
-$config['assets_dir'] = "assets";
+$config['assets_dir'] = "_assets";
 $config['js_dir'] = "js";
 $config['css_dir'] = "css";
 
