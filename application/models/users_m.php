@@ -6,6 +6,7 @@ class Users_m extends DataMapper {
     var $table = 'user';
     var $has_many = array('berita_m');
     var $has_one = array();
+    var $_session_key = '76112dasdsa^%$';
 
     public function login()
     {

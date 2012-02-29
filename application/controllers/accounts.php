@@ -7,10 +7,7 @@ class Accounts extends MY_Controller
     
     public function index ()
     {
-        $this->load->helper('text');
-        
-        $b = new Berita_m();
-        $this->params['berita'] = $b->get();
+        $u = new Users_m();
         
         parent :: index ();
     }
@@ -36,8 +33,8 @@ class Accounts extends MY_Controller
                 $u->password = $this->input->post('password');
                 
                 if ($u->login())
-                {
-                    setSucces('Login success');
+                {   
+                    $this->auth->save($u->get());
                 }
                 else
                 {
@@ -48,6 +45,13 @@ class Accounts extends MY_Controller
         
         parent :: index ('login');
     }
+    
+    public function logout ()
+    {
+        $this->auth->logout();
+        redirect($this->module.'/login');
+    }
+    
 }
 
 /* End of file berita.php */
