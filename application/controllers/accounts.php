@@ -35,6 +35,7 @@ class Accounts extends MY_Controller
                 if ($u->login())
                 {   
                     $this->auth->save($u->get());
+                    redirect ($this->module);
                 }
                 else
                 {
