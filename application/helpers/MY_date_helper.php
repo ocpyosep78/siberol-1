@@ -1,4 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/**
+ * Date Helper
+ *
+ * @license	MIT License
+ * @category	Helpers
+ * @author	Purwandi <free6300@gmail.com>
+ * @link	http://www.purwandi.me
+ */
+
 function date_between($string)
 {
     $diff = abs(strtotime($string) - time());

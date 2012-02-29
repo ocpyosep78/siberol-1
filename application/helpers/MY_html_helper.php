@@ -1,59 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-// ------------------------------------------------------------------------
-
 /**
- * Load File JS
+ * HTML Helper
  *
- * @access       public
- * @param        string
- * @return       string
+ * @license	MIT License
+ * @category	Helpers
+ * @author	Purwandi <free6300@gmail.com>
+ * @link	http://www.purwandi.me
  */
-if ( ! function_exists('js'))
-{
-    function js ($file = '')
-    {
-    	if (is_array($file))
-	{
-	    foreach($file as $val)
-	    {
-		echo '<script src="'.base_url().'_assets/js/'.$val.'" type="text/javascript"></script>';
-		echo "\n";
-	    }
-	}
-	else
-	{
-	    echo '<script src="'.base_url().'_assets/js/'.$file.'" type="text/javascript"></script>';
-	}
-    }
-}
-
-/**
- * Load File CSS
- *
- * @access       public
- * @param        string
- * @return       string
- */
-if ( ! function_exists('css'))
-{
-    function css ($file = '')
-    {
-	if (is_array($file))
-	{
-	    foreach($file as $val)
-	    {
-		echo '<link href="'.base_url().'_assets/css/'.$val.'" media="screen" rel="stylesheet" type="text/css" />';
-		echo "\n";
-	    }
-	}
-	else
-	{
-	   echo '<link href="'.base_url().'_assets/css/'.$file.'" media="screen" rel="stylesheet" type="text/css" />';
-	}
-	
-    }
-}
 
 /**
  * Load File Image User
