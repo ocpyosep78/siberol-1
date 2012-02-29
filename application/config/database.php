@@ -72,26 +72,56 @@
 | the active record class
 */
 
-$active_group = 'default';
+switch (ENVIRONMENT) {
+        case 'development':
+                $active_group = 'development';
+                break;
+        case 'staging':
+                $active_group = 'staging';
+                break;
+        default:
+                $active_group = 'production';
+                break;
+}
+
 $active_record = TRUE;
 
-$db['default']['dsn']      = '';
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
-$db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = FALSE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
-$db['default']['failover'] = array();
+$db['development']['dsn']      = '';
+$db['development']['hostname'] = 'localhost';
+$db['development']['username'] = 'root';
+$db['development']['password'] = 'neki';
+$db['development']['database'] = 'siberol';
+$db['development']['dbdriver'] = 'mysqli';
+$db['development']['dbprefix'] = 'tb_';
+$db['development']['pconnect'] = FALSE;
+$db['development']['db_debug'] = TRUE;
+$db['development']['cache_on'] = FALSE;
+$db['development']['cachedir'] = '';
+$db['development']['char_set'] = 'utf8';
+$db['development']['dbcollat'] = 'utf8_general_ci';
+$db['development']['swap_pre'] = '';
+$db['development']['autoinit'] = TRUE;
+$db['development']['stricton'] = FALSE;
+$db['development']['failover'] = array();
+
+
+$db['production']['dsn']      = '';
+$db['production']['hostname'] = 'localhost';
+$db['production']['username'] = '';
+$db['production']['password'] = '';
+$db['production']['database'] = '';
+$db['production']['dbdriver'] = 'mysqli';
+$db['production']['dbprefix'] = '';
+$db['production']['pconnect'] = FALSE;
+$db['production']['db_debug'] = TRUE;
+$db['production']['cache_on'] = FALSE;
+$db['production']['cachedir'] = '';
+$db['production']['char_set'] = 'utf8';
+$db['production']['dbcollat'] = 'utf8_general_ci';
+$db['production']['swap_pre'] = '';
+$db['production']['autoinit'] = TRUE;
+$db['production']['stricton'] = FALSE;
+$db['production']['failover'] = array();
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

@@ -25,8 +25,9 @@
  * @filesource
  */
 
-class Welcome extends CI_Controller {
-
+class Welcome extends MY_Controller {
+	
+	public $module = 'welcome';
 	/**
 	 * Index Page for this controller.
 	 *
@@ -44,7 +45,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		parent :: index ();
 	}
 }
 
