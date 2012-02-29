@@ -137,6 +137,12 @@ if ( ! function_exists('getPosts'))
 
 // -----------------------------------------------------------------------------------------
 
+/**
+ * Form helper
+ *
+ * To deal with twitter bootstrap
+ */
+
 if ( ! function_exists('form_text'))
 {
     function form_text($label, $data , $value = FALSE, $extra = FALSE)
@@ -201,125 +207,119 @@ if ( ! function_exists('form_pass'))
 
 if ( ! function_exists('form_area'))
 {
-	function form_area($label, $data , $value = FALSE, $extra = FALSE)
+    function form_area($label, $data , $value = FALSE, $extra = FALSE)
+    {
+	$CI = & get_instance();
+	$val = $CI->input->post($data) ? $CI->input->post($data) : $value;
+	
+	if (form_error($data))
 	{
-		$CI = & get_instance();
-		$val = $CI->input->post($data) ? $CI->input->post($data) : $value;
-		
-		if (form_error($data))
-		{
-			echo '<div class="control-group error">';
-			echo '<label class="control-label error" for="'.$data.'">'.$label.'</label>';
-			echo '<div class="controls error">';
-				echo '<textarea name="'.$data.'" '.$extra.' id="'.$data.'">'.$val.'</textarea>';
-				echo form_error($data,'<span class="help-inline">','</span>');
-			echo '</div></div>';
-			
-		}
-		else
-		{
-			echo '<div class="control-group">';
-			echo '<label class="control-label" for="'.$data.'">'.$label.':</label>';
-			echo '<div class="controls">';
-				echo '<textarea name="'.$data.'" '.$extra.' id="'.$data.'">'.$val.'</textarea>';
-			echo '</div></div>';
-		}
+	    echo '<div class="control-group error">';
+	    echo '<label class="control-label error" for="'.$data.'">'.$label.'</label>';
+	    echo '<div class="controls error">';
+		echo '<textarea name="'.$data.'" '.$extra.' id="'.$data.'">'.$val.'</textarea>';
+	        echo form_error($data,'<span class="help-inline">','</span>');
+	    echo '</div></div>';
 	}
+	else
+	{
+	    echo '<div class="control-group">';
+	    echo '<label class="control-label" for="'.$data.'">'.$label.':</label>';
+	    echo '<div class="controls">';
+		echo '<textarea name="'.$data.'" '.$extra.' id="'.$data.'">'.$val.'</textarea>';
+	    echo '</div></div>';
+	}
+    }
 }
 
 if ( ! function_exists('form_drop'))
 {
-	function form_drop($label, $data , $values= array(), $value,  $extra = FALSE)
+    function form_drop($label, $data , $values= array(), $value,  $extra = FALSE)
+    {
+	$CI = & get_instance();
+	$val = $CI->input->post($data) ? $CI->input->post($data) : $value;
+	
+	if (form_error($data))
 	{
-		$CI = & get_instance();
-		$val = $CI->input->post($data) ? $CI->input->post($data) : $value;
-		
-		if (form_error($data))
-		{
-			echo '<div class="control-group error">';
-			echo '<label class="control-label error">'.$label.':</label>';
-			echo '<div class="controls error">';
-				echo form_dropdown($data, $values, $val, $extra);
-				echo form_error($data,'<span class="help-inline">','</span>');
-			echo '</div></div>';
-			
-		}
-		else
-		{
-			echo '<div class="control-group">';
-			echo '<label class="control-label">'.$label.':</label>';
-			echo '<div class="controls">';
-				echo form_dropdown($data, $values, $val, $extra);
-			echo '</div></div>';
-		}
+	    echo '<div class="control-group error">';
+	    echo '<label class="control-label error">'.$label.':</label>';
+	    echo '<div class="controls error">';
+		echo form_dropdown($data, $values, $val, $extra);
+		echo form_error($data,'<span class="help-inline">','</span>');
+	    echo '</div></div>';
 	}
+	else
+	{
+	    echo '<div class="control-group">';
+	    echo '<label class="control-label">'.$label.':</label>';
+	    echo '<div class="controls">';
+		echo form_dropdown($data, $values, $val, $extra);
+	    echo '</div></div>';
+	}
+    }
 }
 
 // -----------------------------------------------------------------------------------------
 
 if ( ! function_exists('form_rad'))
 {
-	function form_rad($label, $data , $values= array(), $value,  $extra = FALSE)
+    function form_rad($label, $data , $values= array(), $value,  $extra = FALSE)
+    {
+	$CI = & get_instance();
+	$val = $CI->input->post($data) ? $CI->input->post($data) : $value;
+	
+	if (form_error($data))
 	{
-		$CI = & get_instance();
-		$val = $CI->input->post($data) ? $CI->input->post($data) : $value;
-		
-		if (form_error($data))
-		{
-			echo '<div class="control-group error">';
-			echo '<label class="control-label error">'.$label.':</label>';
-			echo '<div class="controls error">';
-			echo '<div class="control-list">';
-				echo form_radios($data, $values, $val, $extra);
-				echo form_error($data,'<span class="help-inline">','</span>');
-			echo '</div></div></div>';
-		}
-		else
-		{
-			echo '<div class="control-group">';
-			echo '<label class="control-label">'.$label.':</label>';
-			echo '<div class="controls">';
-			echo '<div class="control-list">';
-				echo form_radios($data, $values, $val, $extra);
-			echo '</div></div></div>';
-		}
+	    echo '<div class="control-group error">';
+	    echo '<label class="control-label error">'.$label.':</label>';
+	    echo '<div class="controls error">';
+	    echo '<div class="control-list">';
+		echo form_radios($data, $values, $val, $extra);
+		echo form_error($data,'<span class="help-inline">','</span>');
+	    echo '</div></div></div>';
 	}
+	else
+	{
+	    echo '<div class="control-group">';
+	    echo '<label class="control-label">'.$label.':</label>';
+	    echo '<div class="controls">';
+	    echo '<div class="control-list">';
+		echo form_radios($data, $values, $val, $extra);
+	    echo '</div></div></div>';
+	}
+    }
 }
 
 // -----------------------------------------------------------------------------------------
 
 if ( ! function_exists('form_file'))
 {
-	function form_file($label, $data , $value,  $extra = FALSE)
+    function form_file($label, $data , $value,  $extra = FALSE)
+    {
+	$CI = & get_instance();
+	$val = $CI->input->post($data) ? $CI->input->post($data) : $value;
+	
+	if (form_error($data))
 	{
-		$CI = & get_instance();
-		$val = $CI->input->post($data) ? $CI->input->post($data) : $value;
-		
-		if (form_error($data))
-		{
-			echo '<div class="control-group error">';
-			echo '<label class="control-label error">'.$label.':</label>';
-			echo '<div class="controls error">';
-			echo '<div class="control-list">';
-				echo form_upload($data, $val, $extra);
-				echo form_error($data,'<span class="help-inline">','</span>');
-			echo '</div></div></div>';
-		}
-		else
-		{
-			echo '<div class="control-group">';
-			echo '<label class="control-label">'.$label.':</label>';
-			echo '<div class="controls">';
-			echo '<div class="control-list">';
-				// echo '<img src="'.base_url().'" alt="" />';
-				echo form_upload($data, '', $extra);
-			echo '</div></div></div>';
-		}
+	    echo '<div class="control-group error">';
+	    echo '<label class="control-label error">'.$label.':</label>';
+	    echo '<div class="controls error">';
+	    echo '<div class="control-list">';
+		echo form_upload($data, $val, $extra);
+		echo form_error($data,'<span class="help-inline">','</span>');
+	    echo '</div></div></div>';
 	}
+	else
+	{
+	    echo '<div class="control-group">';
+	    echo '<label class="control-label">'.$label.':</label>';
+	    echo '<div class="controls">';
+	    echo '<div class="control-list">';
+		echo form_upload($data, '', $extra);
+	    echo '</div></div></div>';
+	}
+    }
 }
 
-
-// ------------------------------------------------
 /* End of file MY_form_helper.php */
 /* Location: ./application/helper/MY_form_helper.php */
-// ------------------------------------------------
