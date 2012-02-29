@@ -2,6 +2,7 @@
 <html>
     <head>
 	<title><?php echo $template['title']; ?></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php echo css('bootstrap.css') ?>
         <?php echo css('bootstrap-responsive.css') ?>
         <?php echo css('docs.css') ?>
@@ -11,8 +12,13 @@
         <![endif]-->
     </head>
     <body>
-	<h1><?php echo $template['title']; ?></h1>
-	<?php echo $template['body']; ?>
+	<?php require ('navbar.php');?>
+	<div class="container">
+	    <?php echo $template['body']; ?>
+	    <?php require ('footer.php');?>
+	</div>
     </body>
     <?php echo js('jquery.js');?>
+    <?php echo js('bootstrap-collapse.js');?>
+    <?php echo js('bootstrap-dropdown.js');?>
 </html>
