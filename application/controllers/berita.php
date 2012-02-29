@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class berita extends MY_Controller{
+class Berita extends MY_Controller{
     
     public $module = 'berita';
     
@@ -14,3 +14,6 @@ class berita extends MY_Controller{
         parent :: index ();
     }
 }
+
+/* End of file berita.php */
+/* Location: ./application/controllers/berita.php */
