@@ -17,8 +17,15 @@
 	    <?php echo $template['body']; ?>
 	    <?php require ('footer.php');?>
 	</div>
+	<?php echo js('jquery.js');?>
+	<?php echo js('bootstrap-collapse.js');?>
+	<?php echo js('bootstrap-transition.js');?>
+	<?php echo js('bootstrap-dropdown.js');?>
+	<?php echo js('bootstrap-carousel.js');?>
+	<script>
+	    $(document).ready(function(){
+		$('#myCarousel').carousel();
+	    })
+	</script>
     </body>
-    <?php echo js('jquery.js');?>
-    <?php echo js('bootstrap-collapse.js');?>
-    <?php echo js('bootstrap-dropdown.js');?>
 </html>

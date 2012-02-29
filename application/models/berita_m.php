@@ -4,8 +4,8 @@ class Berita_m extends DataMapper {
     
     var $model = 'berita_m';
     var $table = 'berita';
-    var $has_one = array('users_m');
-    var $has_many = array();
+    //var $has_one = array('users_m');
+    //var $has_many = array();
     
     // set validation on table
     var $validation = array(
@@ -31,16 +31,6 @@ class Berita_m extends DataMapper {
 	    'label' => 'Kategori'
         )
     );
-    
-    public function __construct($id = NULL)
-    {
-	parent::__construct($id);
-    }
-    
-    function post_model_init($from_cache = FALSE)
-    {
-    
-    }
 }
 
 /* End of file berita_m.php */

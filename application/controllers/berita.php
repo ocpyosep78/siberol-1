@@ -6,6 +6,11 @@ class berita extends MY_Controller{
     
     public function index ()
     {
+        $this->load->helper('text');
         
+        $b = new Berita_m();
+        $this->params['berita'] = $b->get();
+        
+        parent :: index ();
     }
 }

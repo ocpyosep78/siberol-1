@@ -10,7 +10,7 @@
     
         <div class="nav-collapse">
           <ul class="nav">
-            <li class="active"><a href="./index.html">Hot News</a></li>
+            <li class="active"><a href="./index.html"><i class="icon-home icon-white"></i> Home</a></li>
             <li class=""><a href="./scaffolding.html">Internet</a></li>
             <li class=""><a href="./base-css.html">Olahraga</a></li>
             <li class=""><a href="./components.html">Politik</a></li>

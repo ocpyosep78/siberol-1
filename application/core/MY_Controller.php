@@ -33,14 +33,19 @@ class MY_Controller extends CI_Controller {
                 
                 // load spark
 		$this->load->spark('template/1.9.0');
-		$this->load->spark('DataMapper-ORM/1.8.2');
 		$this->load->spark('db-assets/0.5.0');
-
+		
 
                 $this->method   = ucwords(preg_replace('/[_]+/', ' ', strtolower(trim($this->router->fetch_method()))));
 		
 		$this->params['module']		= $this->module;
 		$this->params['method']		= $this->method;
+		
+		if (ENVIRONMENT === 'development')
+		{
+			$this->load->spark('Debug-Toolbar/1.0.7');
+			$this->output->enable_profiler(TRUE);
+		}
 		
 	}
         
