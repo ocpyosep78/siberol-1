@@ -2,6 +2,8 @@
 
 _assets/_writable/capth/*
 
+application/config/database.php
+
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
