@@ -22,7 +22,7 @@
             </ul>
             <?php elseif($this->auth->data('tipe') === 'Redaktur'):?>
             <ul class="nav">
-                <li class=""><a href="./index.html"><i class="icon-home icon-white"></i> Home</a></li>
+                <li><?php echo anchor('accounts','<i class="icon-home icon-white"></i> Home</a>');?></li>
                 <li class=""><a href="./scaffolding.html">Berita Tayang</a></li>
                 <li class=""><a href="./base-css.html">Berita Baru</a></li>
                 <li class=""><a href="./components.html">Manage Users</a></li>
@@ -38,10 +38,10 @@
             </ul>
             <?php elseif($this->auth->data('tipe') === 'Wartawan'):?>
             <ul class="nav">
-                <li class=""><a href="./index.html"><i class="icon-home icon-white"></i> Home</a></li>
-                <li class=""><a href="./scaffolding.html">Tulis Baru</a></li>
-                <li class=""><a href="./base-css.html">Berita Proses Review</a></li>
-                <li class=""><a href="./components.html">Berita Tayang</a></li>
+                <li><?php echo anchor('accounts','<i class="icon-home icon-white"></i> Home</a>');?></li>
+                <li><?php echo anchor('wartawan/insert','Tulis Baru');?></li>
+                <li><?php echo anchor('wartawan/index/review','Berita Proses Review');?></li>
+                <li><?php echo anchor('wartawan/index/tayang','Berita Tayang');?></li>
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">

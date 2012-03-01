@@ -98,7 +98,7 @@ class MY_Controller extends CI_Controller {
 	 */
         protected function insert ($file = 'form', $template = 'default')
         {
-		$this->_view('main', $file);
+		$this->_view($template, $file);
         }
 	
 	
@@ -109,7 +109,7 @@ class MY_Controller extends CI_Controller {
 	 * @param	integer
 	 * @return	void
 	 */
-        protected function update ($file = 'form', $template = 'main')
+        protected function update ($file = 'form', $template = 'default')
         {
 		$this->_view($template, $file);
         }

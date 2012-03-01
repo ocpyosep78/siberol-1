@@ -59,6 +59,7 @@ if ( ! function_exists('strip_html_tags'))
 	    $text );
 
 	// Remove all remaining tags and comments and return.
+	$text = str_replace(array('\"',"\'"),array('"',"'"),$text);
 	return strip_tags( $text );
     }
 }
