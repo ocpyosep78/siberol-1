@@ -16,7 +16,7 @@ function do_upload ($input)
         // load library
         $CI->load->library('upload');
         
-        $storage = './upload/'.date('Ym').'/' ;
+        $storage = './_assets/_writable/upload/'.date('Ym').'/';
         if ( ! is_dir ($storage)) mkdir($storage, 0777, TRUE);
         
         $conf_upload['upload_path']          = $storage;

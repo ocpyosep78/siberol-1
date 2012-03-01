@@ -74,5 +74,11 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('SHOW_DEBUG_BACKTRACE', TRUE);
 
 
+define ('TAHUN', date('Y'));
+define ('TANGGAL', date('Y-m-d'));
+define ('TANGGAL_FULL', date('Y-m-d H:m:s'));
+define ('TANGGAL_UNIX', strtotime(date('Y-m-d')));
+
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
