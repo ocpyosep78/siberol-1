@@ -14,18 +14,18 @@ class Users_m extends DataMapper {
         $u = new Users_m();
 
         // Get this users stored record via their username
-        $u->where('username', $this->username)
-            ->where('password', $this->password)
-            ->get();
+        $loged = $u->where('username', $this->username)
+                    ->where('password', $this->password)
+                    ->get();
 
         // If there was no matching record, this user would be completely cleared so their id would be empty.
-        if (empty($u->id))
+        if (empty($loged->id))
         {
             return FALSE;
         }
         else
         {
-            return TRUE;
+            return $loged;
         }
     }
 }

@@ -37,6 +37,21 @@
                 </li>
             </ul>
             <?php elseif($this->auth->data('tipe') === 'Wartawan'):?>
+            <ul class="nav">
+                <li class=""><a href="./index.html"><i class="icon-home icon-white"></i> Home</a></li>
+                <li class=""><a href="./scaffolding.html">Tulis Baru</a></li>
+                <li class=""><a href="./base-css.html">Berita Proses Review</a></li>
+                <li class=""><a href="./components.html">Berita Tayang</a></li>
+            </ul>
+            <ul class="nav pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> <?php echo $this->auth->data('nama_lengkap');?> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><?php echo anchor('accounts/profile','Profile');?></li>
+                        <li><?php echo anchor('accounts/logout','Logout');?></li>
+                    </ul>
+                </li>
+            </ul>
             <?php else:?>
             <?php endif;?>
             

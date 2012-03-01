@@ -34,9 +34,9 @@ class Accounts extends MY_Controller
                     $u->username = $this->input->post('username');
                     $u->password = $this->input->post('password');
                     
-                    if ($u->login())
+                    if ($cek = $u->login())
                     {   
-                        $this->auth->save($u->get());
+                        $this->auth->save($cek);
                         redirect ($this->module);
                     }
                     else
