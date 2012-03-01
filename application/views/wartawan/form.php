@@ -5,7 +5,7 @@
     <legend>Form Berita</legend>
     <?php echo view_errors();?>
     <?php echo form_text('Judul Berita','judul',@$b->judul,'class="span6"');?>
-    <?php echo form_drop('Kategori','kategori',array('olahraga'=>'Olahraga','politik'=>'Politik','hiburan'=>'Hiburan','internet'=>'Internet'),@$b->judul);?>
+    <?php echo form_drop('Kategori','kategori',array(''=>'Select kategori','olahraga'=>'Olahraga','politik'=>'Politik','hiburan'=>'Hiburan','internet'=>'Internet'),@$b->kategori);?>
     <?php echo form_file('Attachment','gambar');?> <?php echo @$b->gambar;?>
     <?php echo form_area('Isi Berita','isi',@$b->isi,'class="span12"');?>
     <div class="form-actions">
