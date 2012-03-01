@@ -16,7 +16,7 @@ function do_upload ($input)
         // load library
         $CI->load->library('upload');
         
-        $storage = './_assets/_writable/upload/'.date('Ym').'/';
+        $storage = './_assets/_writable/upload/';
         if ( ! is_dir ($storage)) mkdir($storage, 0777, TRUE);
         
         $conf_upload['upload_path']          = $storage;
@@ -28,11 +28,10 @@ function do_upload ($input)
         
         if ($CI->upload->do_upload($input))
         {
-                $data = $CI->upload->data();
-                return $data;
+                return array('OK',$CI->upload->data());
         }
         else
         {
-                return FALSE;
+                return array('ERROR',$CI->upload->display_errors());
         }
 }

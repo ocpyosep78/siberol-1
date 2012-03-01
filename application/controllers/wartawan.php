@@ -68,25 +68,27 @@ class Wartawan extends MY_Controller{
                 // asign new object berita
                 $b = new Berita_m();
                 
-                /*
                 // cek apakah ada file yang diupload
-                if ($gambar = $_FILES['gambar'])
+                if ($_FILES['gambar'])
                 {
                     // load upload helper
                     $this->load->helper('upload');
                     
+                    // do upload gambar
+                    $file = do_upload('gambar');
+                    
                     // cek gambar apakah berhasil di upload
-                    if ($file = do_upload('do_upload'))
+                    if ($file[0] == 'OK')
                     {
-                        $b->gambar = $file['file_name'];
+                        $b->gambar = $file[1]['file_name'];
                     }
                     else
                     {
                         // set error, jika gambar tidak bisa di upload
-                        setError('Gambar tidak bisa di upload');
+                        setError($file[1]);
                     }
                     
-                }*/
+                }
                 
                 $b->tgl_post= TANGGAL_FULL;
                 $b->judul   = $this->input->post('judul');
@@ -94,13 +96,6 @@ class Wartawan extends MY_Controller{
                 $b->kategori= $this->input->post('kategori');
                 $b->nm_war  = $this->auth->data('nama_lengkap');
                 $b->user_id = $this->auth->data('user_id');
-                
-                //$b->tgl_post= TANGGAL_FULL;
-                //$b->judul   = $this->input->post('judul');
-                //$b->isi     = $this->input->post('isi');
-                //$b->kategori= $this->input->post('kategori');
-                //$b->nm_war  = $this->auth->data('nama_lengkap');
-                //$b->user_id = $this->auth->data('user_id');
                 
                 if ($b->skip_validation()->save())
                 {
@@ -110,6 +105,8 @@ class Wartawan extends MY_Controller{
                 {
                     setError('Failed to save ');
                 }
+                
+                
             }
             
         }
@@ -129,6 +126,57 @@ class Wartawan extends MY_Controller{
         
         if ($_POST)
         {
+            $this->load->library('form_validation');
+            
+            $this->form_validation->set_rules('judul','Judul berita','required');
+            $this->form_validation->set_rules('kategori','Kategori berita','required');
+            $this->form_validation->set_rules('isi','Isi berita','required');
+            
+            if ($this->form_validation->run())
+            {
+                // asign new object berita
+                $b = new Berita_m();
+                
+                // cek apakah ada file yang diupload
+                if ($_FILES['gambar'])
+                {
+                    // load upload helper
+                    $this->load->helper('upload');
+                    
+                    // do upload gambar
+                    $file = do_upload('gambar');
+                    
+                    // cek gambar apakah berhasil di upload
+                    if ($file[0] == 'OK')
+                    {
+                        $this->db->set('gambar',$file[1]['file_name']);
+                    }
+                    else
+                    {
+                        // set error, jika gambar tidak bisa di upload
+                        setError($file[1]);
+                    }
+                    
+                }
+                
+                $b->tgl_post= TANGGAL_FULL;
+                $b->judul   = $this->input->post('judul');
+                $b->isi     = $this->input->post('isi');
+                $b->kategori= $this->input->post('kategori');
+                $b->nm_war  = $this->auth->data('nama_lengkap');
+                $b->user_id = $this->auth->data('user_id');
+                
+                if ($b->skip_validation()->save())
+                {
+                    redirect($this->module);
+                }
+                else
+                {
+                    setError('Failed to save ');
+                }
+                
+                
+            }
             
         }
         
