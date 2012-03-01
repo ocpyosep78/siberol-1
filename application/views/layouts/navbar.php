@@ -14,17 +14,18 @@
             
             <?php if ( ! $this->auth->is_secure()):?>
             <ul class="nav">
-                <li class=""><a href="./index.html"><i class="icon-home icon-white"></i> Home</a></li>
-                <li class=""><a href="./scaffolding.html">Internet</a></li>
-                <li class=""><a href="./base-css.html">Olahraga</a></li>
-                <li class=""><a href="./components.html">Politik</a></li>
-                <li class=""><a href="./javascript.html">Hiburan</a></li>
+                <li><?php echo anchor('berita','<i class="icon-home icon-white"></i> Home</a>');?></li>
+                <li><?php echo anchor('berita/page/internet','Internet');?></li>
+                <li><?php echo anchor('berita/page/olahraga','Olahraga');?></li>
+                <li><?php echo anchor('berita/page/politik','Politik');?></li>
+                <li><?php echo anchor('berita/page/hiburan','Hiburan');?></li>
             </ul>
             <?php elseif($this->auth->data('tipe') === 'Redaktur'):?>
             <ul class="nav">
                 <li><?php echo anchor('accounts','<i class="icon-home icon-white"></i> Home</a>');?></li>
                 <li><?php echo anchor('redaktur/index/review','Berita Proses Review');?></li>
                 <li><?php echo anchor('redaktur/index/tayang','Berita Tayang');?></li>
+                <li><?php echo anchor('users/index','Manage users');?></li>
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">

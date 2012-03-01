@@ -3,8 +3,9 @@
 /**
  * Date Helper
  *
+ * @package     Siberol
  * @license	MIT License
- * @category	Helpers
+ * @category	Helper
  * @author	Purwandi <free6300@gmail.com>
  * @link	http://www.purwandi.me
  */

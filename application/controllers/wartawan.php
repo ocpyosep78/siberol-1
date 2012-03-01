@@ -1,4 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * Wartawan Controller
+ *
+ * @package     Siberol
+ * @license	MIT License
+ * @category	Controller
+ * @author	Purwandi <free6300@gmail.com>
+ * @link	http://www.purwandi.me
+ */
 
 class Wartawan extends MY_Controller{
     

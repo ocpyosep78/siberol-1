@@ -1,4 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * Account Controller
+ *
+ * @package     Siberol
+ * @license	MIT License
+ * @category	Controller
+ * @author	Purwandi <free6300@gmail.com>
+ * @link	http://www.purwandi.me
+ */
 
 class Accounts extends MY_Controller
 {
@@ -7,9 +16,49 @@ class Accounts extends MY_Controller
     
     public function index ()
     {
-        $u = new Users_m();
+       parent :: index ();
+    }
+    
+    public function profile ()
+    {
         
-        parent :: index ();
+        $this->load->helper('form');
+        
+        if ($_POST)
+        {
+            $this->load->library('form_validation');
+        
+            $this->form_validation->set_rules('username','Username','required|min_length[5]');
+            $this->form_validation->set_rules('nama_lengkap','Nama lengkap','required|min_length[5]');
+            
+            if ($this->form_validation->run())
+            {
+                $arr1 = $arr2 = array('id' => $this->auth->data('user_id'));
+                
+                $arr2['username']     = $this->input->post('username');
+                $arr2['nama_lengkap'] = $this->input->post('nama_lengkap');
+                
+                // if password is exist
+                if ($this->input->post('password'))
+                {
+                    $arr2['password ']    = $this->input->post('password');
+                }
+                
+                if ($this->db->update('user', $arr2, $arr1))
+                {
+                    setSucces('Profile is updated');
+                }
+                else
+                {
+                    setError('Can not update profile');
+                }
+            }
+        }
+        
+        $u = new Users_m();
+        $this->params['u'] = $u->where('id',$this->auth->data('user_id'))->get();
+        parent :: update();
+        
     }
     
     public function login()

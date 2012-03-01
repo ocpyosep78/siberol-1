@@ -64,7 +64,7 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "berita";
 $route['404_override'] = '';
 
 

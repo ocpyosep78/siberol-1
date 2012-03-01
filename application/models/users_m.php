@@ -1,11 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * Users
+ *
+ * @package     Siberol
+ * @license	MIT License
+ * @category	Model
+ * @author	Purwandi <free6300@gmail.com>
+ * @link	http://www.purwandi.me
+ */
 class Users_m extends DataMapper {
     
     var $model = 'users_m';
     var $table = 'user';
-    var $has_many = array('berita_m');
-    var $has_one = array();
+    //var $has_many = array('berita_m');
+    //var $has_one = array();
     var $_session_key = '76112dasdsa^%$';
 
     public function login()

@@ -1,4 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * Auth Libraries
+ *
+ * @package     Siberol
+ * @license	MIT License
+ * @category	Libraries
+ * @author	Purwandi <free6300@gmail.com>
+ * @link	http://www.purwandi.me
+ */
 
 class Auth
 {
@@ -11,6 +20,13 @@ class Auth
         $this->session = $ci->session;
     }
     
+    /**
+     * Save session
+     * 
+     * @access  public
+     * @param   array
+     * @return  string
+     */
     public function save($loged)
     {
         $key = array (
@@ -22,6 +38,13 @@ class Auth
         $this->session->set_userdata($this->_session_key, $key);
     }
     
+    /**
+     * Get data session
+     * 
+     * @access  public
+     * @param   string
+     * @return  string
+     */
     public function data ($key)
     {
         $data = $this->session->userdata($this->_session_key);
@@ -67,3 +90,6 @@ class Auth
         return $this->session->unset_userdata($this->_session_key);
     }
 }
+
+/* End of file auth.php */
+/* Location: ./application/libraries/auth.php */

@@ -19,8 +19,8 @@
                 <p><small><i class="icon-time"></i> <?php echo $b->tgl_post;?> &nbsp;&nbsp;<i class="icon-tag"></i> <?php echo ucwords($b->kategori);?></small></p>
                 <p><?php echo word_limiter(strip_html_tags($b->isi));?></p>
             </td>
-            <td><?php echo ($b->status == 1) ? '&nbsp;':anchor($module.'/update/'.$b->id,'Update');?></td>
-            <td><?php echo ($b->status == 1) ? '&nbsp;':anchor($module.'/delete/'.$b->id,'Delete');?></td>
+            <td><?php echo anchor($module.'/update/'.$b->id,'Update');?></td>
+            <td><?php echo anchor($module.'/delete/'.$b->id,'Delete');?></td>
         </tr>
         <?php endforeach;?>
     </tbody>

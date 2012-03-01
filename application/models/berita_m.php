@@ -1,4 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * Berita
+ *
+ * @package     Siberol
+ * @license	MIT License
+ * @category	Model
+ * @author	Purwandi <free6300@gmail.com>
+ * @link	http://www.purwandi.me
+ */
 
 class Berita_m extends DataMapper {
     
