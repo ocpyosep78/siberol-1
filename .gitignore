@@ -2,6 +2,7 @@
 
 _assets/_writable/capth/*
 
+database.php
 application/config/database.php
 
 application/cache/*
