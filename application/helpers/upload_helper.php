@@ -32,6 +32,6 @@ function do_upload ($input)
         }
         else
         {
-                return array('ERROR',$CI->upload->display_errors());
+                return array('ERROR',$CI->upload->display_errors('<li>','</li>'));
         }
 }

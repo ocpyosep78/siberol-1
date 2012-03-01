@@ -99,7 +99,7 @@ class Wartawan extends MY_Controller{
                 
                 if ($b->skip_validation()->save())
                 {
-                    redirect($this->module);
+                    redirect($this->module.'/index/review');
                 }
                 else
                 {
@@ -122,65 +122,77 @@ class Wartawan extends MY_Controller{
      */
     public function update ($id)
     {
-        $this->load->helper('form');
+        // validate it
+        $b = new Berita_m();
+        $berita = $b->get_by_id($id);
         
-        if ($_POST)
+        if ( ! $berita->exists())
         {
-            $this->load->library('form_validation');
+            $this->show_404();
+            //exit;
+        }
+        else
+        {
+            $this->load->helper('form');
             
-            $this->form_validation->set_rules('judul','Judul berita','required');
-            $this->form_validation->set_rules('kategori','Kategori berita','required');
-            $this->form_validation->set_rules('isi','Isi berita','required');
-            
-            if ($this->form_validation->run())
+            if ($_POST)
             {
-                // asign new object berita
-                $b = new Berita_m();
+                // load form_validation
+                $this->load->library('form_validation');
                 
-                // cek apakah ada file yang diupload
-                if ($_FILES['gambar'])
+                $this->form_validation->set_rules('judul','Judul berita','required');
+                $this->form_validation->set_rules('kategori','Kategori berita','required');
+                $this->form_validation->set_rules('isi','Isi berita','required');
+                
+                if ($this->form_validation->run())
                 {
-                    // load upload helper
-                    $this->load->helper('upload');
+                    // set array where
+                    $arr1 = $arr2 = array('id' => $id);
                     
-                    // do upload gambar
-                    $file = do_upload('gambar');
+                    // set array to set field
+                    $arr2['tgl_post']   = TANGGAL_FULL;
+                    $arr2['judul']      = $this->input->post('judul');
+                    $arr2['isi']        = $this->input->post('isi');
+                    $arr2['nm_war']     = $this->auth->data('nama_lengkap');
+                    $arr2['user_id']    = $this->auth->data('user_id');
                     
-                    // cek gambar apakah berhasil di upload
-                    if ($file[0] == 'OK')
+                    // cek apakah ada file yang diupload
+                    if ($_FILES['gambar'])
                     {
-                        $this->db->set('gambar',$file[1]['file_name']);
+                        // load upload helper
+                        $this->load->helper('upload');
+                        
+                        // do upload gambar
+                        $file = do_upload('gambar');
+                        
+                        // cek gambar apakah berhasil di upload
+                        if ($file[0] == 'OK')
+                        {
+                            $arr2['gambar'] = $file[1]['file_name'];
+                        }
+                        else
+                        {
+                            // set error, jika gambar tidak bisa di upload
+                            setError($file[1]);
+                        }
+                        
+                    }
+                    
+                    if ($this->db->update('berita',$arr2, $arr1))
+                    {
+                        redirect($this->module.'/index/review');
                     }
                     else
                     {
-                        // set error, jika gambar tidak bisa di upload
-                        setError($file[1]);
+                        setError('Failed to update ');
                     }
                     
                 }
                 
-                $b->tgl_post= TANGGAL_FULL;
-                $b->judul   = $this->input->post('judul');
-                $b->isi     = $this->input->post('isi');
-                $b->kategori= $this->input->post('kategori');
-                $b->nm_war  = $this->auth->data('nama_lengkap');
-                $b->user_id = $this->auth->data('user_id');
-                
-                if ($b->skip_validation()->save())
-                {
-                    redirect($this->module);
-                }
-                else
-                {
-                    setError('Failed to save ');
-                }
-                
-                
             }
-            
+            $this->params['b'] = $berita;
+            parent :: update ();
         }
-        
-        parent :: update ();
     }
     
     /**
@@ -190,14 +202,33 @@ class Wartawan extends MY_Controller{
      */
     public function delete ($id)
     {
-        $this->load->helper('form');
+        // validate it
+        $b = new Berita_m();
+        $b->where('id',$id)->where('status',0)->get();
         
-        if ($_POST)
+        if ( ! $b->exists())
         {
+            $this->show_404();
+        }
+        else
+        {
+            $this->load->helper('form');
             
+            if ($_POST)
+            {
+                if ($b->delete())
+                {
+                    redirect($this->module.'/index/review');
+                }
+                else
+                {
+                    setError('Failed to delete ');
+                }
+            }
+            
+            parent :: delete ();
         }
         
-        parent :: delete ();
     }
 }
 

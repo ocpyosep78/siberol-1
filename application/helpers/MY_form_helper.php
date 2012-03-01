@@ -357,7 +357,7 @@ if ( ! function_exists('form_rad'))
 
 if ( ! function_exists('form_file'))
 {
-    function form_file($label, $data , $value,  $extra = FALSE)
+    function form_file($label, $data , $value = FALSE,  $extra = FALSE)
     {
 	$CI = & get_instance();
 	$val = $CI->input->post($data) ? $CI->input->post($data) : $value;

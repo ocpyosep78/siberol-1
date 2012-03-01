@@ -151,6 +151,12 @@ class MY_Controller extends CI_Controller {
 	{
 		
 	}
+	
+	
+	protected function show_404()
+	{
+		$this->load->view('layouts/404');
+	}
 }
 
 /* End of file MY_Controller.php */

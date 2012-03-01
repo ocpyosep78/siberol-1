@@ -6,10 +6,10 @@
     <?php echo view_errors();?>
     <?php echo form_text('Judul Berita','judul',@$b->judul,'class="span6"');?>
     <?php echo form_drop('Kategori','kategori',array('olahraga'=>'Olahraga','politik'=>'Politik','hiburan'=>'Hiburan','internet'=>'Internet'),@$b->judul);?>
-    <?php echo form_file('Attachment','gambar',@$berita->gambar);?>
-    <?php echo form_area('Isi Berita','isi',@$berita->isi,'class="span12"');?>
+    <?php echo form_file('Attachment','gambar');?> <?php echo @$b->gambar;?>
+    <?php echo form_area('Isi Berita','isi',@$b->isi,'class="span12"');?>
     <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
         <button type="reset" class="btn">Reset</button>
     </div>
 <?php echo form_close();?>
