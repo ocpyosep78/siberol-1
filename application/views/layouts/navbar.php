@@ -23,9 +23,8 @@
             <?php elseif($this->auth->data('tipe') === 'Redaktur'):?>
             <ul class="nav">
                 <li><?php echo anchor('accounts','<i class="icon-home icon-white"></i> Home</a>');?></li>
-                <li class=""><a href="./scaffolding.html">Berita Tayang</a></li>
-                <li class=""><a href="./base-css.html">Berita Baru</a></li>
-                <li class=""><a href="./components.html">Manage Users</a></li>
+                <li><?php echo anchor('redaktur/index/review','Berita Proses Review');?></li>
+                <li><?php echo anchor('redaktur/index/tayang','Berita Tayang');?></li>
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">

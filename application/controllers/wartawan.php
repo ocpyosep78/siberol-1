@@ -124,7 +124,10 @@ class Wartawan extends MY_Controller{
     {
         // validate it
         $b = new Berita_m();
-        $berita = $b->get_by_id($id);
+        $berita = $b->where('id',$id)
+                    ->where('status',0)
+                    ->where('user_id', $this->auth->data('user_id'))
+                    ->get();
         
         if ( ! $berita->exists())
         {
@@ -204,7 +207,11 @@ class Wartawan extends MY_Controller{
     {
         // validate it
         $b = new Berita_m();
-        $b->where('id',$id)->where('status',0)->get();
+        
+        $b->where('id',$id)
+            ->where('status',0)
+            ->where('user_id', $this->auth->data('user_id'))
+            ->get();
         
         if ( ! $b->exists())
         {
