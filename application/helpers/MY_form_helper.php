@@ -135,6 +135,69 @@ if ( ! function_exists('getPosts'))
 	}
 }
 
+
+// handle captha
+function buat_capt ()
+{
+    $CI = &get_instance();
+    
+    // random word untuk captcha
+    $pool = '23456789ABCDEFGHJKLMNPRSTUVWXYZ';
+
+    $str = '';
+    for ($i = 0; $i < 4; $i++)
+    {
+	$str .= substr($pool, mt_rand(0, strlen($pool) -1), 1);
+    }
+
+    // load helper capthca
+    $CI->load->helpers ('captcha');
+    $val=array (
+		'word'          => $str,
+		'img_path'	    =>	'./_assets/_writable/capth/',
+		'img_url'	    =>	base_url().'_assets/_writable/capth/',
+		'expiration'    => 150    /* ,
+		'font_size'     => 50
+		     ,     
+		'img_width'  	=> '70',  
+		'img_height' 	=> '20'  */
+	    );
+    $cap = create_captcha($val); 
+    $data = array (
+		    'captcha_time'	=>$cap['time'],
+		    'ip_address'	=>$CI->input->ip_address(),
+		    'word'		=>$cap['word']
+    );
+    $query = $CI->db->insert_string('captcha',$data);
+    $CI->db->query($query);
+	
+    // captcha
+    $habis = time()-150;
+    $CI->db->query("DELETE FROM captcha WHERE captcha_time < $habis");
+    return $cap['image'];
+}
+    
+// handle validasi capcha
+function validasi_capth ()
+{
+    $CI = &get_instance();
+
+    //extract(posts(array('cpt_security')));
+    
+    // set time
+    list($usec, $sec) = explode(" ", microtime());
+    $now = ((float)$usec + (float)$sec);
+	
+    $SQL = "SELECT COUNT(*) AS count FROM captcha WHERE word=? AND ip_address = ? AND captcha_time > ? ";
+    $binds =array ($CI->input->post('captcha_secure'), $CI->input->ip_address(), $now - 200);
+    $query=$CI->db->query($SQL,$binds);
+    
+    if ($query->row()->count == 0) return FALSE ;
+    else return TRUE;
+    
+}
+
+
 // -----------------------------------------------------------------------------------------
 
 /**

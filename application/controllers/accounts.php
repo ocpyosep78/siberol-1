@@ -14,36 +14,45 @@ class Accounts extends MY_Controller
     
     public function login()
     {
-        $this->load->helper('form');
+        $this->load->helper(array('form'));
         
         if ($_POST)
         {
-            $this->load->library('form_validation');
-            
-            $this->form_validation->set_rules('username','Username','trim|required');
-            $this->form_validation->set_rules('password','Password','trim|required');
-            
-            if ($this->form_validation->run())
+            if (validasi_capth())
             {
-                // create object
-                $u = new Users_m();
+                $this->load->library('form_validation');
+            
+                $this->form_validation->set_rules('username','Username','trim|required');
+                $this->form_validation->set_rules('password','Password','trim|required');
                 
-                // asign object
-                $u->username = $this->input->post('username');
-                $u->password = $this->input->post('password');
-                
-                if ($u->login())
-                {   
-                    $this->auth->save($u->get());
-                    redirect ($this->module);
-                }
-                else
+                if ($this->form_validation->run())
                 {
-                    setError('Username and password is not registered');
+                    // create object
+                    $u = new Users_m();
+                    
+                    // asign object
+                    $u->username = $this->input->post('username');
+                    $u->password = $this->input->post('password');
+                    
+                    if ($u->login())
+                    {   
+                        $this->auth->save($u->get());
+                        redirect ($this->module);
+                    }
+                    else
+                    {
+                        setError('Username and password is not registered');
+                    }
                 }
             }
+            else
+            {
+                setError('Captcha your enter not valid');
+            }
+            
         }
         
+        $this->params['capth'] = buat_capt();
         parent :: index ('login');
     }
     

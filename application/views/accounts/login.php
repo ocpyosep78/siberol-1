@@ -6,7 +6,12 @@
                 <?php echo view_errors();?>
                 <?php echo form_text('Username','username');?>
                 <?php echo form_pass('Password','password');?>
-                <?php echo form_text('Captcha','captcha');?>
+                <div class="control-group">
+                    <div class="controls">
+                        <?php echo $capth;?>
+                    </div>
+                </div>
+                <?php echo form_text('Captcha','captcha_secure');?>
             </fieldset>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Sign In</button>
