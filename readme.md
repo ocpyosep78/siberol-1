@@ -1,7 +1,7 @@
 # Siberol
 
 Siberol merupakan singkatan sistem informasi berita online yang dibuat untuk menyelesaikan
-tugas mata kuliah server side scripting yang diberikan oleh Dosen Mercubuana Meruya Jakarta
+tugas mata kuliah server side scripting yang diberikan oleh Dosen Mercubuana Meruya Jakarta.
 
 
 ## Framework
@@ -80,4 +80,5 @@ http://goo.gl/33Z68
 
 ## Author
     
-    Purwandi : <a href="http://www.purwandi.me">Home page</a>
+Purwandi : http://www.purwandi.me
+Twitter : http://www.twitter.com/purwandi_m
