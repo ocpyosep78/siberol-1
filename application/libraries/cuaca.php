@@ -40,15 +40,16 @@ class Cuaca
             {
                 $pos1 = strpos($opt, "<td>",$pos1 + 1 );
                 $pos2 = strpos($opt, "</td>", $pos1 + 1 );
-                if ($j === 0) $cuaca = substr($opt, $pos1, $pos2 - $pos1);
-                elseif ($j === 1) $suhu = substr($opt, $pos1, $pos2 - $pos1);
-                elseif ($j === 2) $lembab = substr($opt, $pos1, $pos2 - $pos1);
+                if ($j === 0) $cuaca = str_replace(array('<td>','</td>'),array('',''),substr($opt, $pos1, $pos2 - $pos1));
+                elseif ($j === 1) $suhu = str_replace(array('<td>','</td>'),array('',''),substr($opt, $pos1, $pos2 - $pos1));
+                elseif ($j === 2) $lembab = str_replace(array('<td>','</td>'),array('',''),substr($opt, $pos1, $pos2 - $pos1));
             }
-            
             
             echo '<tr>';
                 echo '<td>'.$daerah.'</td>';
-                echo $cuaca.$suhu.$lembab;
+                echo '<td>'.$cuaca.'</td>';
+                echo '<td>'.$suhu.'</td>';
+                echo '<td>'.$lembab.'</td>';
             echo '</tr>';
         }
     }

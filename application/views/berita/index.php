@@ -85,22 +85,6 @@
         
         <p><small>Sumber : <a href="http://meteo.bmkg.go.id/prakiraan/indonesia">BMKG</a></small></p>
         
-        <div class="page-header">
-            <h3>Media Olahraga</h3>
-        </div>
-        <p>Lorep sum ipsum</p>
-        
-        <div class="page-header">
-            <h3>Media Politik</h3>
-        </div>
-        <p>Lorep sum ipsum</p>
-        
-        <div class="page-header">
-            <h3>Media Hiburan</h3>
-        </div>
-        
-        <p>Lorep sum ipsum</p>
-        
     </div>
     <div class="span8">
         
