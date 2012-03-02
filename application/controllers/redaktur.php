@@ -122,8 +122,6 @@ class Redaktur extends MY_Controller{
                     $arr2['judul']      = $this->input->post('judul');
                     $arr2['isi']        = $this->input->post('isi');
                     $arr2['status']     = $this->input->post('status');
-                    $arr2['nm_war']     = $this->auth->data('nama_lengkap');
-                    $arr2['user_id']    = $this->auth->data('user_id');
                     
                     // cek apakah ada file yang diupload
                     if ($_FILES['gambar'])
