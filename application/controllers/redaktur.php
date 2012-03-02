@@ -14,6 +14,25 @@ class Redaktur extends MY_Controller{
     // set module is wartawan
     public $module = 'redaktur';
     
+    
+    /**
+     * Constructor and cek security
+     *
+     */
+    public function __construct()
+    {
+        parent :: __construct();
+        $this->auth->is_secure_redirect();
+        if ($this->auth->data('tipe') != 'Redaktur')
+        {
+            $this->load->helper('form');
+            
+            $this->auth->logout();
+            setError('You don not have permission to acces, please login again :)');
+            redirect ('accounts/login');
+        }
+    }
+    
     /**
      * Get all berita
      *

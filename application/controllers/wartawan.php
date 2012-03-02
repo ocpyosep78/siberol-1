@@ -15,6 +15,26 @@ class Wartawan extends MY_Controller{
     public $module = 'wartawan';
     
     /**
+     * Constructor and cek security
+     *
+     */
+    public function __construct()
+    {
+        parent :: __construct();
+        $this->auth->is_secure_redirect();
+        
+        if ( $this->auth->data('tipe') != 'Wartawan')
+        {
+            $this->load->helper('form');
+            
+            $this->auth->logout();
+            setError('You don not have permission to acces, please login again :)');
+            redirect ('accounts/login');
+        }
+    }
+    
+    
+    /**
      * Get all berita
      *
      * Berita berdasarkan tipe, tayang dan review
