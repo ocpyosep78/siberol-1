@@ -80,5 +80,5 @@ http://goo.gl/33Z68
 
 ## Author
     
-Purwandi : http://www.purwandi.me
-Twitter : http://www.twitter.com/purwandi_m
++ Purwandi : http://www.purwandi.me
++ Twitter : http://www.twitter.com/purwandi_m
