@@ -24,9 +24,19 @@ tugas mata kuliah server side scripting yang diberikan oleh Dosen Mercubuana Mer
 2. Directory structure for the assets files, with a writeable assets/cache directory
 
 
-## Project URL : 
+## Project URL :
+
 http://goo.gl/33Z68
 
+## Demo :
+
+http://purwandi-christian.umbit.info/
+
++ Redaktur (username = purwandi,    password = 123)
++ Wartawan (username = guntur,      password = 123)
+
+    NOTES MOHON PASSWORD DAN USERNAME YANG ADA JANGAN DIGANTI, SUPAYA ORANG LAIN BISA
+    LOGIN DENGAN MENGGUNAKAN USERNAME DAN PASSWORD DEFAULTNYA.
 
 ## Instalasi
 
